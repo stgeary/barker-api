@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.includes(:experiences, :educations, :skills, :capstones).all
+    render :index
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+    render :show
+  end
+
   def create
     user = User.new(
       name: params[:name],
@@ -13,5 +23,10 @@ class UsersController < ApplicationController
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to @user, notice: "user was successfully destroyed."
   end
 end
