@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.includes(:experiences, :educations, :skills, :capstones).all
+    @users = User.all
     render :index
   end
 
