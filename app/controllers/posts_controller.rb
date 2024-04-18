@@ -1,3 +1,5 @@
+require cloudinary
+
 class PostsController < ApplicationController
   def create
     user = User.new(
@@ -7,6 +9,8 @@ class PostsController < ApplicationController
     )
     if user.save
       render json: { message: "User created successfully" }, status: :created
+      Cloudinary::Uploader.upload(:image_url,
+                                  use_filename: true)
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
