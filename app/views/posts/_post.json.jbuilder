@@ -1,2 +1,2 @@
-json.text user.text
-json.image_url user.image_url
+json.text post.text
+json.image_url post.image_url
